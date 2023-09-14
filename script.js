@@ -43,10 +43,11 @@ function displayBooks(library, booksDisplay) {
 
 function deleteBook(e){
   var index = e.target.getAttribute('data-index');
-  var childBook = document.querySelector(`[data-index='${index}']`);
-  if (childBook.parentNode) {
-    childBook.parentNode.removeChild(childBook);
+  library.splice(index,1);
+  while (booksDisplay.firstChild) {
+    booksDisplay.removeChild(booksDisplay.firstChild);
   }
+  displayBooks(library,booksDisplay);
 }
 
 function toggleRead(e){
