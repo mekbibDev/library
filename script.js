@@ -11,7 +11,8 @@ var addBookButton = document.querySelector('#addBookButton');
 showDialogButton.addEventListener('click', () => {
   addBookDialog.showModal();
 })
-cancelButton.addEventListener('click', () => {
+cancelButton.addEventListener('click', (e) => {
+  e.preventDefault();
   addBookDialog.close();
 })
 readButton.addEventListener('click', (e) => {
