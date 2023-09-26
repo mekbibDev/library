@@ -65,6 +65,7 @@ function addBookFromUser(e) {
   e.preventDefault();
   addBookToLibrary(book);
   addBook(book);
+  document.querySelector('form').reset();
   addBookDialog.close();
 }
 
