@@ -1,0 +1,76 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 100px auto;
+}
+
+header {
+  padding: 20px;
+  box-shadow: 0px 1px 4px gray;
+
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+}
+
+td,
+th {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235, 235, 235);
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(250, 250, 250);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245, 245, 245);
+}
+
+caption {
+  padding: 20px;
+  text-align: start;
+  font-size: 2rem;
+}
+
+button,
+input[type=button] {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+dialog {
+  margin: auto;
+  padding: 20px;
+  width: 50vw;
+  border: none;
+  border-radius: 10px;
+}
+
+fieldset {
+  border: none;
+  padding: 10px;
+}
+
+label {
+  display: block;
+}

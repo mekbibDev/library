@@ -1,5 +1,5 @@
 var library = [];
-var booksDisplay = document.querySelector('table');
+var tbody = document.querySelector('tbody');
 var thead = document.querySelector('thead');
 var headerRow = document.createElement('tr');
 var showDialogButton = document.querySelector('#showDialog');
@@ -14,10 +14,13 @@ showDialogButton.addEventListener('click', () => {
 cancelButton.addEventListener('click', () => {
   addBookDialog.close();
 })
-readButton.addEventListener('click',(e) => {
+readButton.addEventListener('click', (e) => {
   e.target.value = e.target.value === 'Yes' ? 'No' : 'Yes';
 })
 addBookButton.addEventListener('click', addBookFromUser)
+
+createTableHeader();
+
 var book1 = new Book('Eternal Skies', 'Emily Johnson', 'In a world where the sky never changes, \
 four young adventurers set out on a perilous journey to uncover the secrets behind the immovable heavens.\
 As they navigate through ancient ruins and mystical forests, they must confront their fears and make choices \
@@ -37,16 +40,8 @@ var book3 = new Book('The Quantum Gate', 'Sarah Parker', 'When brilliant physici
 addBookToLibrary(book3);
 
 
-for (key in book1) {
-  if (key === 'haveRead')
-    continue;
-  let header = document.createElement('th');
-  header.textContent = key;
-  header.scope = 'col';
-  headerRow.appendChild(header);
-}
-booksDisplay.appendChild(headerRow);
-displayBooks(library, booksDisplay);
+
+displayBooks(library, tbody);
 function Book(title, author, description, pages, read) {
   this.title = title;
   this.author = author;
@@ -95,38 +90,40 @@ function displayBooks(library, booksDisplay) {
 }
 
 function addBook(book) {
-    let bookRow = document.createElement('tr');
-    bookRow.dataset.title = book['title'];
+  let bookRow = document.createElement('tr');
+  bookRow.dataset.title = book['title'];
 
-    let title = document.createElement('td');
-    title.textContent = book['title'];
-    bookRow.appendChild(title);
+  let title = document.createElement('td');
+  title.textContent = book['title'];
+  bookRow.appendChild(title);
 
-    let author = document.createElement('td');
-    author.textContent = book['author'];
-    bookRow.appendChild(author);
+  let author = document.createElement('td');
+  author.textContent = book['author'];
+  bookRow.appendChild(author);
 
-    let description = document.createElement('td');
-    description.textContent = book['description'];
-    bookRow.appendChild(description);
+  let description = document.createElement('td');
+  description.textContent = book['description'];
+  bookRow.appendChild(description);
 
-    let pages = document.createElement('td');
-    pages.textContent = book['pages'];
-    bookRow.appendChild(pages);
+  let pages = document.createElement('td');
+  pages.textContent = book['pages'];
+  bookRow.appendChild(pages);
 
-    let read = document.createElement('td');
-    read.textContent = book.read ? 'Yes' : 'No';
-    read.dataset.titleRead = book.title + read.textContent;
-    read.appendChild(createReadToggleButton(read, book));
-    bookRow.appendChild(read);
+  let read = document.createElement('td');
+  read.textContent = book.read ? 'Yes' : 'No';
+  read.dataset.titleRead = book.title + read.textContent;
+  read.appendChild(createReadToggleButton(read, book));
+  bookRow.appendChild(read);
 
-    let deleteButton = document.createElement('button');
-    deleteButton.textContent = 'delete';
-    deleteButton.dataset.title = book['title'];
-    deleteButton.addEventListener('click', deleteBook);
-    bookRow.appendChild(deleteButton);
+  let deleteTd = document.createElement('td');
+  let deleteButton = document.createElement('button');
+  deleteButton.textContent = 'delete';
+  deleteButton.dataset.title = book['title'];
+  deleteButton.addEventListener('click', deleteBook);
+  deleteTd.appendChild(deleteButton);
+  bookRow.appendChild(deleteTd);
 
-    booksDisplay.appendChild(bookRow);
+  tbody.appendChild(bookRow);
 }
 function deleteBook(e) {
   var title = e.target.getAttribute('data-title');
@@ -160,3 +157,12 @@ function toggleRead(e) {
 }
 
 
+function createTableHeader() {
+  var tableHeaader = ['title', 'author', 'description', 'pages', 'read', '']
+  tableHeaader.forEach(key => {
+    let header = document.createElement('th');
+    header.textContent = key;
+    header.scope = 'col';
+    thead.appendChild(header);
+  })
+}

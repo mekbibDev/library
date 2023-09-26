@@ -10,21 +10,31 @@
 </head>
 
 <body>
-  <div id="container">
+  <div class="container">
     <dialog id="addBookDialog">
       <form>
         <fieldset>
           <legend>Add Book</legend>
-          <label for="title">Title:</label>
-          <input id="title" name="title" type="text" required>
-          <label for="author">Author:</label>
-          <input type="text" name="author" id="author" required>
-          <label for="pages">Pages</label>
-          <input type="tel" name="pages" id="pages" required>
-          <label for="description">Description:</label>
-          <textarea name="description" id="description" cols="30" rows="10" required></textarea>
-          <label for="read">Have read:</label>
-          <input type="button" id="read" name="read" value="No">
+          <div>
+            <label for="title">Title:</label>
+            <input id="title" name="title" type="text" required>
+          </div>
+          <div>
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author" required>
+          </div>
+          <div>
+            <label for="pages">Pages</label>
+            <input type="tel" name="pages" id="pages" required>
+          </div>
+          <div>
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+          </div>
+          <div>
+            <label for="read">Have read:</label>
+            <input type="button" id="read" name="read" value="No">
+          </div>
         </fieldset>
 
         <div>
@@ -33,7 +43,7 @@
         </div>
       </form>
     </dialog>
-    <button id="showDialog">Add Book</button>
+    <header><button id="showDialog">Add Book</button></header>
     <table>
       <caption>Library</caption>
       <thead>
