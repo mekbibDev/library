@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,40 @@
   <script src="./script.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div id="container">
-    <table>
-        <caption>Library</caption>
-        <thead>
+    <dialog id="addBookDialog">
+      <form>
+        <fieldset>
+          <legend>Add Book</legend>
+          <label for="title">Title:</label>
+          <input id="title" name="title" type="text" required>
+          <label for="author">Author:</label>
+          <input type="text" name="author" id="author" required>
+          <label for="pages">Pages</label>
+          <input type="tel" name="pages" id="pages" required>
+          <label for="description">Description:</label>
+          <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+          <label for="read">Have read:</label>
+          <input type="button" id="read" name="read" value="No">
+        </fieldset>
 
-        </thead>
-        <tbody></tbody>
+        <div>
+          <button formmethod="dialog" id="addBookButton" value="Add Book">Add book</button>
+          <button id="cancelButton" value="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <button id="showDialog">Add Book</button>
+    <table>
+      <caption>Library</caption>
+      <thead>
+      </thead>
+      <tbody></tbody>
     </table>
   </div>
 
 </body>
+
 </html>
