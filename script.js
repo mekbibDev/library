@@ -1,21 +1,61 @@
-function Book(title, author, description, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.description = description;
-  this.pages = pages;
-  this.read = read;
-}
+// function Book(title, author, description, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.description = description;
+//   this.pages = pages;
+//   this.read = read;
+// }
+class Book {
+  title;
+  author;
+  description;
+  pages;
+  read;
 
-Book.prototype.haveRead = function () {
-  this.read = !this.read;
+  constructor(title, author, description, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.description = description;
+    this.pages = pages;
+    this.read = read;
+  }
+  haveRead() {
+    this.read = !this.read;
+  }
 }
+// Book.prototype.haveRead = function () {
+//   this.read = !this.read;
+// }
+class Library {
+  books;
 
-function Library() {
-  this.books = [];
+  constructor() {
+    this.books = [];
+  }
+  addBook(book) {
+    this.books.push(book);
+  }
+  
+  deleteBook(title){
+    this.books = this.books.filter(book => book.title != title)
+  }
+  findBook(title){
+    return this.books.find(book => book.title === title)
+  }
+  get books() {
+    return this.books;
+  }
+
+  set books(books){
+    this.books = books;
+  }
 }
-Library.prototype.addBook = function (book) {
-  this.books.push(book);
-}
+// function Library() {
+//   this.books = [];
+// }
+// Library.prototype.addBook = function (book) {
+//   this.books.push(book);
+// }
 
 var library = new Library();
 var tbody = document.querySelector('tbody');
@@ -100,10 +140,10 @@ function addBook(book) {
   var bookRow = document.createElement('tr');
   bookRow.dataset.title = book['title'];
 
-  bookRow.appendChild(createCell('title',book));
-  bookRow.appendChild(createCell('author',book));
-  bookRow.appendChild(createCell('description',book));
-  bookRow.appendChild(createCell('pages',book));
+  bookRow.appendChild(createCell('title', book));
+  bookRow.appendChild(createCell('author', book));
+  bookRow.appendChild(createCell('description', book));
+  bookRow.appendChild(createCell('pages', book));
 
   var read = document.createElement('td');
   read.appendChild(createReadToggleButton(book));
@@ -116,7 +156,7 @@ function addBook(book) {
   tbody.appendChild(bookRow);
 }
 
-function createCell(name,book){
+function createCell(name, book) {
   var cell = document.createElement('td');
   cell.textContent = book[name];
 
@@ -132,14 +172,14 @@ function createReadToggleButton(book) {
   return readToggleButton;
 }
 
-function createDeleteButton (book){
+function createDeleteButton(book) {
   var deleteButton = document.createElement('button');
   deleteButton.textContent = 'delete';
   deleteButton.dataset.title = book['title'];
   deleteButton.addEventListener('click', deleteBook);
 
   return deleteButton;
-}  
+}
 
 function deleteBook(e) {
   var title = e.target.getAttribute('data-title');
@@ -147,16 +187,14 @@ function deleteBook(e) {
   if (bookRow.parentNode) {
     bookRow.parentNode.removeChild(bookRow);
   }
-  library.books = library.books.filter(book => book.title != title);
+  library.deleteBook(title);
 }
 
- 
 function toggleRead(e) {
   var title = e.target.getAttribute('data-title');
-  var book = library.books.find(book => book.title === title);
+  var book = library.findBook(title);
   book.haveRead();
   e.target.textContent = book.read ? 'Yes' : 'No';
-
 }
 
 function createTableHeader() {
